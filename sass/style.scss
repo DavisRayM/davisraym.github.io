@@ -1,17 +1,127 @@
 @import url("https://fonts.googleapis.com/css2?family=Spectral&display=swap");
 
-.content {
+:root {
+    max-width: 60%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
     font-family: "Spectral", serif;
     font-weight: 400;
     font-style: normal;
     font-size: 18px;
+}
 
-    max-width: 60%;
-    margin-left: auto;
-    margin-right: auto;
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    .header {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .page-links {
+            margin: 0;
+            font-size: 15px;
+            font-weight: normal;
+            color: #4c566a;
+
+            .active {
+                font-weight: bold;
+                color: #2e3440 !important;
+            }
+
+            a:hover {
+                font-weight: bold;
+                color: #2e3440;
+            }
+        }
+
+        .header-title {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+
+            .socials {
+                margin-left: 10px;
+                font-size: 15px;
+
+                a {
+                    text-decoration: none;
+                    &:hover {
+                        color: #4c566a;
+                    }
+                }
+            }
+        }
+    }
+
+    a {
+        text-decoration: underline;
+
+        &:hover,
+        &:link,
+        &:active,
+        &:visited {
+            color: #2e3440;
+        }
+
+        &:hover {
+            color: #2e3440;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    }
 
     .title {
+        font-weight: bold;
         font-size: 30px;
-        font-style: bold;
+        margin: 0;
+    }
+
+    .posts {
+        margin-bottom: 1em;
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .post-item {
+            list-style-type: none;
+            font-size: 18px;
+            color: #4c566a;
+        }
+
+        .post-link {
+            padding-left: 2em;
+            color: #2e3440;
+        }
+    }
+
+    .section-title {
+        font-weight: bold;
+        font-size: 20px;
+        color: #4c566a;
+        margin: 0;
+    }
+
+    .footer {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        display: flex;
+        flex-direction: row;
+        font-size: 12px;
+        justify-content: space-evenly;
     }
 }
