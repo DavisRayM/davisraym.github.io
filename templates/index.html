@@ -1,42 +1,39 @@
-{% extends "base.html" %}
-{% block content %}
-  {% include "partials/nav.html" %}
+{% extends "base.html" %} {% block content %} {% include "partials/nav.html" %}
+{{ section.content | safe }}
 
-  {{ section.content | safe }}
+<div class="projects">
+  {% set projects = get_section(path="projects/_index.md") %}
+  <span class="section-title">{{ projects.title }}</span>
+  {% if projects.pages %}
+  <ul>
+    {% for page in projects.pages %}
+    <li class="project-item">
+      <a class="project-link"{% if page.extra.link %}target="_blank" rel="noreferrer nofollow"{% endif %} href="{% if page.extra.link %}{{ page.extra.link }}{% else %}{{ page.permalink }}{% endif %}">{{ page.title }}</a>:
+      <span class="project-summary">{{ page.summary | striptags }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <br />
+  <span>No Projects</span>
+  {% endif %}
+</div>
 
-  <div class="posts">
-      {% set posts = get_section(path="posts/_index.md") %}
-      <span class="section-title">{{ posts.title }}</span>
-      {% if posts.pages %}
-      <ul>
-      {% for page in posts.pages %}
-          <li class="post-item">{{ page.date }} <a class="post-link" href="{{ page.permalink }}">{{ page.title }}</a></li>
-          {% if loop.index == posts.extra.limit %}{% break %}{% endif %}
-      {% endfor %}
-      </ul>
-      {% else %}
-      <br>
-      <span>No Posts</span>
-      {% endif %}
-  </div>
-
-  <div class="projects">
-      {% set projects = get_section(path="projects/_index.md") %}
-      <span class="section-title">{{ projects.title }}</span>
-      {% if projects.pages %}
-      <ul>
-      {% for page in projects.pages %}
-          <li class="project-item">
-              <a class="project-link" href="{{ page.permalink }}">{{ page.title }}</a>:
-              <span class="project-summary">{{ page.summary | striptags }}</span>
-          </li>
-      {% endfor %}
-      </ul>
-      {% else %}
-      <br>
-      <span>No Projects</span>
-      {% endif %}
-  </div>
-
-  {% include "partials/footer.html" %}
-{% endblock %}
+<div class="posts">
+  {% set posts = get_section(path="posts/_index.md") %}
+  <span class="section-title">{{ posts.title }}</span>
+  {% if posts.pages %}
+  <ul>
+    {% for page in posts.pages %}
+    <li class="post-item">
+      {{ page.date }}
+      <a class="post-link" href="{{ page.permalink }}">{{ page.title }}</a>
+    </li>
+    {% if loop.index == posts.extra.limit %}{% break %}{% endif %} {% endfor %}
+  </ul>
+  {% else %}
+  <br />
+  <span>No Posts</span>
+  {% endif %}
+</div>
+{% include "partials/footer.html" %} {% endblock %}
