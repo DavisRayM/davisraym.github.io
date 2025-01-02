@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block content %} {% include "partials/nav.html" %}
+<div class="page-content">
+    <div class="page-header">
+        <span class="page-title">{{ page.title }}</span>
+        <span class="page-subtitle"><i class="fa fa-calendar"></i> {{ page.updated }} | <i class="fa fa-clock-o"></i> {{ page.reading_time }} minute read</span>
+    </div>
+    {{ page.content | safe }}
+</div>
+{% endblock %}

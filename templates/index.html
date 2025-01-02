@@ -1,29 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="header">
-    <div class="header-title">
-      <span class="title">{{ section.title }}</span>
-      <div class="socials">
-        <a href="https://github.com/DavisRayM" target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-github"></i>
-        </a>
-        <a href="mailto:davis.ray.muro@gmail.com">
-          <i class="fa fa-envelope"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/davis-muro" target="_blank" rel="noopener noreferrer">
-          <i class="fa fa-linkedin"></i>
-        </a>
-      </div>
-    </div>
-    <div class="page-links">
-        {% for link in config.extra.links %}
-        {% if loop.index > 1 %}
-         |
-        {% endif %}
-        <a {% if section.path == link.url %}class="active"{% endif %} href={{ link.url }}>{{ link.name }}</a>
-        {% endfor %}
-    </div>
-  </div>
+  {% include "partials/nav.html" %}
+
   {{ section.content | safe }}
 
   <div class="posts">
@@ -37,12 +15,27 @@
       {% endfor %}
       </ul>
       {% else %}
+      <br>
       <span>No Posts</span>
       {% endif %}
   </div>
 
   <div class="projects">
-      <span class="section-title">Projects</span>
+      {% set projects = get_section(path="projects/_index.md") %}
+      <span class="section-title">{{ projects.title }}</span>
+      {% if projects.pages %}
+      <ul>
+      {% for page in projects.pages %}
+          <li class="project-item">
+              <a class="project-link" href="{{ page.permalink }}">{{ page.title }}</a>:
+              <span class="project-summary">{{ page.summary | striptags }}</span>
+          </li>
+      {% endfor %}
+      </ul>
+      {% else %}
+      <br>
+      <span>No Projects</span>
+      {% endif %}
   </div>
 
   {% include "partials/footer.html" %}

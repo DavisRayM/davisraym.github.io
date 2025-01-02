@@ -1,0 +1,24 @@
+<div class="header">
+  <div class="header-title">
+    <span class="title">{{ config.author }}</span>
+    <div class="socials">
+      <a href="https://github.com/DavisRayM" target="_blank" rel="noopener noreferrer">
+          <i class="fa fa-github"></i>
+      </a>
+      <a href="mailto:davis.ray.muro@gmail.com">
+        <i class="fa fa-envelope"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/davis-muro" target="_blank" rel="noopener noreferrer">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </div>
+  </div>
+  <div class="page-links">
+      {% for link in config.extra.links %}
+      {% if loop.index > 1 %}
+       |
+      {% endif %}
+      <a {% if section and section.path == link.url %}class="active"{% endif %} href={{ link.url }}>{{ link.name }}</a>
+      {% endfor %}
+  </div>
+</div>

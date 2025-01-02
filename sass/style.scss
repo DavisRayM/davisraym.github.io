@@ -108,6 +108,36 @@ body {
         }
     }
 
+    .projects {
+        margin-bottom: 1em;
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .project-item {
+            list-style-type: none;
+            font-size: 18px;
+            color: #4c566a;
+        }
+
+        .project-link {
+            color: #2e3440;
+            font-weight: bold;
+
+            &:hover {
+                color: #4c566a;
+                text-decoration-color: #2e3440;
+                text-decoration-style: double;
+            }
+        }
+
+        .project-summary {
+            padding-right: 2em;
+        }
+    }
+
     .section-title {
         font-weight: bold;
         font-size: 20px;
@@ -123,5 +153,24 @@ body {
         flex-direction: row;
         font-size: 12px;
         justify-content: space-evenly;
+    }
+}
+
+.page-content {
+    .page-header {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    .page-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 1em;
+    }
+
+    .page-subtitle {
+        font-size: 12px;
+        color: #4c566a;
+        margin: 0;
     }
 }

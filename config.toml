@@ -23,6 +23,6 @@ favicon = "favicon.ico"
 copyright_year = 2025
 links = [
       { name="Home", url="/" },
-      { name="All Posts", url="/posts" },
-      { name="Projects", url="/projects" },
+      { name="All Posts", url="/posts/" },
+      { name="Projects", url="/projects/" },
 ]
