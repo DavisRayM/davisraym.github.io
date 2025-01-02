@@ -27,7 +27,7 @@
     {% for page in posts.pages %}
     <li class="post-item">
       {{ page.date }}
-      <a class="post-link" href="{{ page.permalink }}">{{ page.title }}</a>
+      <a class="post-link" {% if page.extra.link %}target="_blank" rel="noreferrer nofollow"{% endif %} href="{% if page.extra.link %}{{ page.extra.link }}{% else %}{{ page.permalink }}{% endif %}">{{ page.title }}</a>
     </li>
     {% if loop.index == posts.extra.limit %}{% break %}{% endif %} {% endfor %}
   </ul>
