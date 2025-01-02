@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Spectral&display=swap");
 
+$title-size: 30px;
+$section-title-size: 20px;
+$subtitle-size: 18px;
+$text-size: 17px;
+$page-subtitle-size: 12px;
+
 :root {
     max-width: 50%;
     height: 100%;
@@ -8,7 +14,20 @@
     font-family: "Spectral", serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 18px;
+    font-size: $text-size;
+}
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 992px) {
+    :root {
+        max-width: 90%;
+    }
+}
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+    :root {
+        max-width: 90%;
+    }
 }
 
 body {
@@ -30,7 +49,6 @@ body {
 
         .page-links {
             margin: 0;
-            font-size: 15px;
             font-weight: normal;
             color: #4c566a;
 
@@ -53,7 +71,6 @@ body {
 
             .socials {
                 margin-left: 10px;
-                font-size: 15px;
 
                 a {
                     text-decoration: none;
@@ -84,7 +101,7 @@ body {
 
     .title {
         font-weight: bold;
-        font-size: 30px;
+        font-size: $title-size;
         margin: 0;
     }
 
@@ -98,7 +115,7 @@ body {
 
         .post-item {
             list-style-type: none;
-            font-size: 18px;
+            font-size: $text-size;
             color: #4c566a;
         }
 
@@ -118,7 +135,7 @@ body {
 
         .project-item {
             list-style-type: none;
-            font-size: 18px;
+            font-size: $text-size;
             color: #4c566a;
         }
 
@@ -140,7 +157,7 @@ body {
 
     .section-title {
         font-weight: bold;
-        font-size: 20px;
+        font-size: $section-title-size;
         color: #4c566a;
         margin: 0;
     }
@@ -163,13 +180,13 @@ body {
         text-align: center;
     }
     .page-title {
-        font-size: 20px;
+        font-size: $section-title-size;
         font-weight: bold;
         margin-top: 1em;
     }
 
     .page-subtitle {
-        font-size: 12px;
+        font-size: $page-subtitle-size;
         color: #4c566a;
         margin: 0;
     }
