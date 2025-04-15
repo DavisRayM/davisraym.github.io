@@ -3,7 +3,7 @@ title: "Cryo: Part 1"
 date: 2025-04-15
 updated: 2025-04-15
 ---
-What does it really take to build a database from scratch? That question led me to start **Cryo**, a side project where I'm implementing a B-Tree-based database in Rust. This series documents the thought process, challenges, and progress so far.
+*What does it really take to build a database from scratch?*
 
 <!-- more -->
 
@@ -49,7 +49,7 @@ The next big step is moving beyond the fixed row format. Supporting variable-siz
 
 It’s going to make things trickier, but it’s also where the database starts to feel more “real.” I’ll probably break that work into its own post once I dive in.
 
-### What’s Ahead in This Series
+## What’s Ahead in This Series
 
 Over the next few parts, I’ll be unpacking the deeper mechanics of Cryo:
 
