@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://davisraym.com/</loc>
+    </url>
+    <url>
+        <loc>https://davisraym.com/posts/</loc>
+    </url>
+    <url>
+        <loc>https://davisraym.com/projects/</loc>
+    </url>
+    <url>
+        <loc>https://davisraym.com/projects/cryo-01/</loc>
+        <lastmod>2025-04-15</lastmod>
+    </url>
+    <url>
+        <loc>https://davisraym.com/projects/kaznet/</loc>
+        <lastmod>2025-01-02</lastmod>
+    </url>
+    <url>
+        <loc>https://davisraym.com/projects/stwrd-no-show-1231209231/</loc>
+        <lastmod>2025-01-02</lastmod>
+    </url>
+    <url>
+        <loc>https://davisraym.com/projects/superstartrek-no-show-123120232131/</loc>
+        <lastmod>2025-09-19</lastmod>
+    </url>
+    <url>
+        <loc>https://davisraym.com/projects/tictactoe-no-show-123120232131/</loc>
+        <lastmod>2025-05-01</lastmod>
+    </url>
+</urlset>

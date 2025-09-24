@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="description" content="Davis Raymond Muro's Personal Website. Explore my projects, and insights on technology and social events." />
+  <meta name="keywords" content="Davis Muro, Davis Raymond Muro, Software Engineer, Software Engineer Tanzania, Software Engineer US, Software Engineer Seattle" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>
+    Davis Muro - Cryo: Part 1
+  </title>
+  <link
+    rel="stylesheet"
+    href="https://davisraym.com/style.css"
+    type="text/css"
+    media="screen"
+  />
+  
+  <link rel="icon" type="image/png" href="https:&#x2F;&#x2F;davisraym.com/favicon.ico" />
+  
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <link rel="canonical" href="https://davisraym.com" />
+</head>
+
+
+  <body>
+    <div class="content">
+       <div class="header">
+  <div class="header-title">
+    <span class="title"><a href="https:&#x2F;&#x2F;davisraym.com" style="text-decoration: none;">Davis Muro</a></span>
+    <div class="socials">
+      <a href="https://github.com/DavisRayM" target="_blank" rel="noopener noreferrer">
+          <i class="fa fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/davis-muro" target="_blank" rel="noopener noreferrer">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </div>
+  </div>
+  <div class="page-links">
+      
+      
+      <a  href=&#x2F;>Home</a>
+      
+  </div>
+</div>
+
+<div class="page-content">
+    <div class="page-header">
+        <span class="page-title">Cryo: Part 1</span>
+        <span class="page-subtitle"><i class="fa fa-calendar"></i> 2025-04-15 | <i class="fa fa-clock-o"></i> 4 minute read</span>
+    </div>
+<!--
+    Oh look! you found the table of contents!
+    
+    <ul>
+        
+        <li>
+            <a href="https://davisraym.com/projects/cryo-01/#the-origins-of-the-project">The origins of the project</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://davisraym.com/projects/cryo-01/#what-cryo-can-do-right-now">What Cryo Can Do Right Now</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://davisraym.com/projects/cryo-01/#next-up-variable-row-sizes">Next Up: Variable Row Sizes</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://davisraym.com/projects/cryo-01/#what-s-ahead-in-this-series">What’s Ahead in This Series</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://davisraym.com/projects/cryo-01/#up-next-b-trees-splits-pages">Up Next: B-Trees, Splits &amp; Pages</a>
+            
+        </li>
+        
+    </ul>
+    
+-->
+    <p><em>What does it really take to build a database from scratch?</em></p>
+<span id="continue-reading"></span>
+<p>I've recently been working on a side project called <a href="https://github.com/DavisRayM/cryo"><strong>Cryo</strong></a>, a replicated B-Tree database written from scartch in Rust. Well... "replicated" is a bit aspirational. Right now, Cryo is a single instance BTree store with a basic CLI interface (inspired by SQLite) and supports simple select, insert, update and delete operations.</p>
+<p>This blog series is mainly for me to document and share the journey; What i've built so far, what broke in the process, what I've learned and where I'm headed next. I'll be breaking it down over multiple posts, each focusing on a specific layer or challenge in the project.</p>
+<p>But this first part is more of a sketchbook than a tutorial.</p>
+<h2 id="the-origins-of-the-project"><a class="zola-anchor" href="#the-origins-of-the-project" aria-label="Anchor link for: the-origins-of-the-project">The origins of the project</a></h2>
+<p>The idea for Cryo first started taking shape during my Masters study. Between long hours in data structures, distributed systems and parallel systems courses and late-night reading sessions with the book <em><a href="https://www.oreilly.com/library/view/database-internals/9781492040330/">Database Internals</a></em> by Alex Petrov, I found myself getting more and more curious about the inner working of databases; especially the storage layer.</p>
+<p>Textbooks and lectures covered the basic introduction to how B-Trees worked <em>in theory</em>, but I wanted to see what I would discover and learn if I actually built one. What would break ? What would I misunderstand and most important What would I learn?</p>
+<p>That itch turned into a project; Cryo.</p>
+<p>Cryo started with a question I couldn’t shake:
+<strong>“What would it take to build a real, replicated, persistent, queryable database from scratch?”</strong></p>
+<p>I wasn’t aiming to replace SQLite or match RocksDB in performance—I just wanted to peel back the layers and <em>actually understand</em> what goes into building one.</p>
+<p>I chose B-Trees because they’re elegant, widely used, and have stood the test of time. With variants of the original structure improved and utilized by production grade database i.e <a href="https://www.postgresql.org/docs/current/btree.html">Postgresql</a>. And replication because… well, that part excites me; everything in this day and age is replicated one way or another. Wouldn't it be great to truly understand how it's implemented ? How Raft or Paxos truly works; <em>Paxos especially was interesting to learn in class but I didn't quite get how to implement it</em>.</p>
+<h2 id="what-cryo-can-do-right-now"><a class="zola-anchor" href="#what-cryo-can-do-right-now" aria-label="Anchor link for: what-cryo-can-do-right-now">What Cryo Can Do Right Now</a></h2>
+<p>So far, Cryo is a command-line tool that supports:</p>
+<ul>
+<li>Creating a single database file on disk</li>
+<li>Retrieving, inserting, updating, and deleting fixed-size rows</li>
+<li>Persisting data using a basic B-Tree structure</li>
+</ul>
+<p>Records currently follow a fixed schema:</p>
+<pre data-lang="sql" style="background-color:#2b303b;color:#c0c5ce;" class="language-sql "><code class="language-sql" data-lang="sql"><span>(id </span><span style="color:#b48ead;">INTEGER</span><span>, username </span><span style="color:#b48ead;">CHAR</span><span>[</span><span style="color:#d08770;">32</span><span>], email </span><span style="color:#b48ead;">CHAR</span><span>[</span><span style="color:#d08770;">255</span><span>])
+</span></code></pre>
+<p>All rows are stored in fixed-size slots, which has made the storage layout simpler to start with, but limiting. Users are tied to the specific row structure and does not allow them to define any schema or structure for the data they'd like to store.</p>
+<h2 id="next-up-variable-row-sizes"><a class="zola-anchor" href="#next-up-variable-row-sizes" aria-label="Anchor link for: next-up-variable-row-sizes">Next Up: Variable Row Sizes</a></h2>
+<p>The next big step is moving beyond the fixed row format. Supporting variable-sized rows (and eventually more flexible schemas) means rethinking how rows are encoded, how pages are laid out, and how free space is managed inside each page.</p>
+<p>It’s going to make things trickier, but it’s also where the database starts to feel more “real.” I’ll probably break that work into its own post once I dive in.</p>
+<h2 id="what-s-ahead-in-this-series"><a class="zola-anchor" href="#what-s-ahead-in-this-series" aria-label="Anchor link for: what-s-ahead-in-this-series">What’s Ahead in This Series</a></h2>
+<p>Over the next few parts, I’ll be unpacking the deeper mechanics of Cryo:</p>
+<ul>
+<li>How the B-Tree is implemented, including node layout and balancing</li>
+<li>How data is written to disk and organized in pages</li>
+<li>The eventual replication system</li>
+<li>Design trade-offs I’ve made and bugs I’ve had to wrestle with</li>
+</ul>
+<p>If you want to check out the code or follow along, it’s all open-source:<br />
+👉 <a href="https://github.com/DavisRayM/cryo">github.com/DavisRayM/cryo</a></p>
+<h2 id="up-next-b-trees-splits-pages"><a class="zola-anchor" href="#up-next-b-trees-splits-pages" aria-label="Anchor link for: up-next-b-trees-splits-pages">Up Next: B-Trees, Splits &amp; Pages</a></h2>
+<p>In Part 2, I’ll get into how Cryo’s B-Tree actually works; the core logic behind inserts, node splits, and page storage. Stay tuned.</p>
+
+</div>
+
+      <footer class="footer">
+  <span>
+    Copyright © 2025 Davis Muro
+  </span>
+</footer>
+
+    </div>
+  </body>
+</html>
