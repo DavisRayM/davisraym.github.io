@@ -2,6 +2,7 @@
 title: "The Rising Scammer Epidemic: How To Protect Yourself Online"
 date: 2025-03-08
 author: "Davis Muro"
+draft: true
 ---
 Scammers have long been a persistent threat to hardworking individuals,
 from the classic Nigerian prince scam to government impersonators and
